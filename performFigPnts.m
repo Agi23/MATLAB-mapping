@@ -10,13 +10,19 @@ function [pnts] = performFigPnts(ptCloud)
 % title("pc1")
 % datacursormode(f1, 'on');
 
-x = linspace(0,10,150);
-y = cos(5*x);
-fig = figure;
-plot(x,y,'Color',[0,0.7,0.9])
-title('2-D Line Plot')
-xlabel('x')
-ylabel('cos(5x)')
+%x = linspace(0,10,150);
+%y = cos(5*x);
+%fig = figure;
+%plot(x,y,'Color',[0,0.7,0.9])
+%title('2-D Line Plot')
+%xlabel('x')
+%ylabel('cos(5x)')
+fig=figure;
+pcshow(ptCloud, "AxesVisibility","on")
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
+title("pcA")
 % Enable data cursor mode
 datacursormode on
 dcm_obj = datacursormode(fig);
@@ -24,7 +30,7 @@ dcm_obj = datacursormode(fig);
 %set(dcm_obj,'UpdateFcn',@myupdatefcn)
 % Wait while the user to click
 pnts={};
-for k = 1:5
+for k = 1:3
     disp('Click line to display a data tip, then press "Return"')
     pause 
     % Export cursor to workspace
