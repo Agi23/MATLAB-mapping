@@ -1,4 +1,4 @@
-function [pnts] = performFigPnts(ptCloud)
+function [pnts1, pnts2] = performFigPntsDuo(pc1, pc2)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 % f1=figure;
@@ -17,28 +17,43 @@ function [pnts] = performFigPnts(ptCloud)
 %title('2-D Line Plot')
 %xlabel('x')
 %ylabel('cos(5x)')
-fig=figure;
-pcshow(ptCloud, "AxesVisibility","on")
+fig1=figure;
+pcshow(pc1, "AxesVisibility","on")
 xlabel('X');
 ylabel('Y');
 zlabel('Z');
-title("pcA")
+title("pc1")
+fig2=figure;
+pcshow(pc2, "AxesVisibility","on")
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
+title("pc2")
+
 % Enable data cursor mode
 datacursormode on
-dcm_obj = datacursormode(fig);
+dcm_obj1 = datacursormode(fig1);
+dcm_obj2 = datacursormode(fig2);
 % Set update function
 %set(dcm_obj,'UpdateFcn',@myupdatefcn)
 % Wait while the user to click
-pnts={};
-for k = 1:5
+pnts1={};
+pnts2={};
+for k = 1:3
     disp('Click line to display a data tip, then press "Return"')
     pause 
     % Export cursor to workspace
-    info_struct = getCursorInfo(dcm_obj);
-    if isfield(info_struct, 'Position')
-        disp('Clicked positioin is')
+    info_struct1 = getCursorInfo(dcm_obj1);
+    info_struct2 = getCursorInfo(dcm_obj2);
+    if isfield(info_struct1, 'Position')
+        disp('Clicked positioin of 1 is')
         disp(info_struct.Position)
-        pnts{k}=info_struct.Position;
+        pnts1{k}=info_struct.Position;
+    elseif isfield(info_struct2, 'Position')
+        disp('Clicked positioin of 2 is')
+        disp(info_struct2.Position)
+        pnts2{k}=info_struct.Position;
+
     end
 end
 
