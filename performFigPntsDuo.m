@@ -39,25 +39,41 @@ dcm_obj2 = datacursormode(fig2);
 % Wait while the user to click
 pnts1={};
 pnts2={};
-count1=0;
-count2=0;
+%count1=0;
+%count2=0;
+count=0;
 for k = 1:5
-    disp('Click line to display a data tip, then press "Return"')
+    %disp('Click line to display a data tip, then press "Return"')
+    disp('Select matching points in figure1 and figure2 then press enter')
     pause 
     % Export cursor to workspace
     info_struct1 = getCursorInfo(dcm_obj1);
     info_struct2 = getCursorInfo(dcm_obj2);
-    if isfield(info_struct1, 'Position')
-        count1=count1+1;
-        disp('Clicked positioin of 1 is')
-        disp(info_struct1.Position)
-        pnts1{count1}=info_struct1.Position;
-    elseif isfield(info_struct2, 'Position')
-        count2=count2+1;
-        disp('Clicked positioin of 2 is')
-        disp(info_struct2.Position)
-        pnts2{count2}=info_struct2.Position;
+    if ((isfield(info_struct1, 'Position')) && (isfield(info_struct2, 'Position')))
+        count=count+1;
+        disp('Clicked positioin of 1 is');
+        disp(info_struct1.Position);
+
+        disp('Clicked positioin of 2 is');
+        disp(info_struct2.Position);
+
+        pnts1{count}=info_struct1.Position;
+        pnts2{count}=info_struct2.Position;
+    else
+        disp('Matching points not found please try again')
     end
+  
+%     if isfield(info_struct1, 'Position')
+%         count1=count1+1;
+%         disp('Clicked positioin of 1 is')
+%         disp(info_struct1.Position)
+%         pnts1{count1}=info_struct1.Position;
+%     elseif isfield(info_struct2, 'Position')
+%         count2=count2+1;
+%         disp('Clicked positioin of 2 is')
+%         disp(info_struct2.Position)
+%         pnts2{count2}=info_struct2.Position;
+ %   end
 end
 
 end
