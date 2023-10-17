@@ -1,4 +1,4 @@
-function [pnts1, pnts2] = performFigPntsDuo(pc1, pc2)
+function [pnts1_matrix, pnts2_matrix] = performFigPntsDuo(pc1, pc2)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 % f1=figure;
@@ -30,6 +30,7 @@ ylabel('Y');
 zlabel('Z');
 title("pc2")
 
+
 % Enable data cursor mode
 datacursormode on
 dcm_obj1 = datacursormode(fig1);
@@ -37,8 +38,11 @@ dcm_obj2 = datacursormode(fig2);
 % Set update function
 %set(dcm_obj,'UpdateFcn',@myupdatefcn)
 % Wait while the user to click
-pnts1={};
-pnts2={};
+%pnts1={};
+%pnts2={};
+
+pnts1_matrix = zeros(3,5);
+pnts2_matrix = zeros(3,5);
 %count1=0;
 %count2=0;
 count=0;
@@ -56,9 +60,12 @@ for k = 1:5
 
         disp('Clicked positioin of 2 is');
         disp(info_struct2.Position);
+        
+        pnts1_matrix(:,count)=info_struct1.Position;
+        pnts2_matrix(:,count)=info_struct2.Position;
 
-        pnts1{count}=info_struct1.Position;
-        pnts2{count}=info_struct2.Position;
+        %pnts1{count}=info_struct1.Position;
+        %pnts2{count}=info_struct2.Position;
     else
         disp('Matching points not found please try again')
     end
